@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\PlayListController;
@@ -54,17 +54,22 @@ Route::get('update-play-list', [PlayListController::class, 'updateplay-list']);
 Route::post('add-new-play-list', [PlayListController::class, 'submitAdd']);
 Route::post('update-play-list', [PlayListController::class, 'submitUpdate']);
 
-Route::post('add-song-playlist/{id}', [PlayListController::class, 'addSong']);
 
+Route::post('auth/register', [AuthController::class, 'register']);
+Route::post('auth/login', [AuthController::class, 'login']);
 
-Route::group([
-    'prefix' => 'auth'
-
-], function ($router) {
-    Route::get('register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
-    Route::post('/change-pass', [AuthController::class, 'changePassWord']);
+Route::middleware('auth:api')->group(function () {
+    Route::get('add-song-playlist/{id}', [PlayListController::class, 'addSong']);
+    Route::get('get-user', [AuthController::class, 'getUser']);
+    Route::get('get-playlist-song/{id}', [PlayListController::class, 'getSong']);
 });
+
+// Route::group([
+//     'prefix' => 'auth'
+
+// ], function ($router) {
+//     Route::post('/logout', [AuthController::class, 'logout']);
+//     Route::post('/refresh', [AuthController::class, 'refresh']);
+//     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+//     Route::post('/change-pass', [AuthController::class, 'changePassWord']);
+// });

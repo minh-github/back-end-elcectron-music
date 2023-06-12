@@ -14,4 +14,9 @@ class playLists extends Model
         'thumb',
         'user_id',
     ];
+
+    function songs()
+    {
+        return $this->hasManyThrough(songs::class, playListsSongs::class, 'play_lists_id', 'id');
+    }
 }

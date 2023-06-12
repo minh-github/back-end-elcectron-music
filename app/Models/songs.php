@@ -28,4 +28,8 @@ class songs extends Model
     {
         return $this->belongsTo(authors::class, 'authors_id', 'id');
     }
+    function playlist()
+    {
+        return $this->belongsToMany(playlist::class, 'playlist_songs');
+    }
 }

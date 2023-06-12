@@ -16,6 +16,6 @@ class categories extends Model
     ];
     public function songs()
     {
-        return $this->hasManyThrough(Song::class, songCategories::class, 'categories_id', 'songs_id', 'id', 'id');
+        return $this->hasManyThrough(songs::class, songCategories::class, 'categories_id', 'songs_id', 'id', 'id');
     }
 }

@@ -37,3 +37,5 @@ Route::post('add-new-play-list', [PlayListController::class, 'submitAdd']);
 Route::post('update-play-list', [PlayListController::class, 'submitUpdate']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
