@@ -35,6 +35,11 @@ class AuthController extends Controller
     {
         $user = auth()->user();
         $playList = playLists::where('user_id', $user->id)->with('songs')->get();
+        foreach ($playList as $item) {
+            if ($item->thumb != '') {
+                $item->thumb = url('/storage/' . $item->thumb);
+            }
+        }
         return response()->json(['user' => $user, 'playlist' => $playList], 200);
     }
 }

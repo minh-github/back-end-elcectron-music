@@ -21,7 +21,7 @@
 
 <body x-data="{ openModalAddSong: false, openModalAddCategory: false }" class="bg-gray-100 font-sans leading-normal tracking-normal">
     @include('components.alert')
-    {{-- <nav id="header" class="fixed top-0 z-10 w-full bg-white shadow">
+    <nav id="header" class="fixed top-0 z-10 w-full bg-white shadow">
         <div class="container mx-auto mt-0 flex w-full flex-wrap items-center pt-3 pb-3 md:pb-0">
             <div class="w-1/2 pl-2 md:pl-0">
                 <a class="text-base font-bold text-gray-900 no-underline hover:no-underline xl:text-xl" href="#">
@@ -125,7 +125,7 @@
             </div>
 
         </div>
-    </nav> --}}
+    </nav>
     <!--Container-->
     <div class="container mx-auto min-h-screen w-full pt-20">
 
@@ -155,7 +155,8 @@
                     <div class="rounded border bg-white p-2 shadow">
                         <div class="flex flex-row items-center">
                             <div class="flex-shrink pr-4">
-                                <div class="rounded bg-pink-600 p-3"><i class="fas fa-users fa-2x fa-fw fa-inverse"></i>
+                                <div class="rounded bg-pink-600 p-3"><i
+                                        class="fas fa-users fa-2x fa-fw fa-inverse"></i>
                                 </div>
                             </div>
                             <div class="flex-1 text-right md:text-center">

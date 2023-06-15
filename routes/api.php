@@ -49,19 +49,20 @@ Route::post('add-new-category', [CategoryController::class, 'submitAdd']);
 Route::post('update-category', [CategoryController::class, 'submitUpdate']);
 
 // playList
-Route::get('add-new-play-list', [PlayListController::class, 'addplay-list']);
 Route::get('update-play-list', [PlayListController::class, 'updateplay-list']);
 Route::post('add-new-play-list', [PlayListController::class, 'submitAdd']);
-Route::post('update-play-list', [PlayListController::class, 'submitUpdate']);
+Route::post('update-play-list/{id}', [PlayListController::class, 'submitUpdate']);
 
 
 Route::post('auth/register', [AuthController::class, 'register']);
 Route::post('auth/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('add-song-playlist/{id}', [PlayListController::class, 'addSong']);
+    Route::get('new-playlist', [PlayListController::class, 'newPlaylist']);
+    Route::get('add-song-playlist/{id}/{listId}', [PlayListController::class, 'addSong']);
     Route::get('get-user', [AuthController::class, 'getUser']);
     Route::get('get-playlist-song/{id}', [PlayListController::class, 'getSong']);
+    Route::get('get-all-playlist', [PlayListController::class, 'getAllPlaylist']);
 });
 
 // Route::group([

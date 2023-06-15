@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function playlist()
+    {
+        return $this->hasMany(playLists::class, 'user_id', 'id');
+    }
 }

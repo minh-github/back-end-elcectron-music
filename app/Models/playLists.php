@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class playLists extends Model
 {
     use HasFactory;
+    protected $table = 'play_lists';
     protected $fillable = [
         'name',
         'description',
@@ -17,6 +18,11 @@ class playLists extends Model
 
     function songs()
     {
-        return $this->hasManyThrough(songs::class, playListsSongs::class, 'play_lists_id', 'id');
+        return $this->hasManyThrough(songs::class, playListsSongs::class, 'play_lists_id', 'id', 'id', 'songs_id');
+    }
+
+    function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
