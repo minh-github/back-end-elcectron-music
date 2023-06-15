@@ -39,13 +39,22 @@ class PlayListController extends Controller
 
     function submitUpdate(Request $request, $id)
     {
-        $pathThumb = $request->file('image')->storeAs('public/playlistThumb', time() . '.' . $request->file('image')->extension());
-        $pathThumb = str_replace('public/', '', $pathThumb);
-        $playList = playLists::where('id', $id)->first();
-        $playList->thumb = $pathThumb;
-        $playList->save();
-        $imageSrc = url('/storage/' . $pathThumb);
-        return response()->json(['imageSrc' => $imageSrc, 'msg' => $request], 200);
+        if ($request->file('image')) {
+            $pathThumb = $request->file('image')->storeAs('public/playlistThumb', time() . '.' . $request->file('image')->extension());
+            $pathThumb = str_replace('public/', '', $pathThumb);
+            $playList = playLists::where('id', $id)->first();
+            $playList->thumb = $pathThumb;
+            $playList->save();
+            $imageSrc = url('/storage/' . $pathThumb);
+            return response()->json(['imageSrc' => $imageSrc, 'msg' => 'update ảnh thành công'], 200);
+        }
+        if ($request['name']) {
+            $playList = playLists::where('id', $id)->first();
+            $playList->name = $request['name'];
+            $playList->save();
+            return response()->json(['name' => $request['name'], 'msg' => 'upadate tên thành công'], 200);
+        }
+        return response()->json(['msg' => 'upadate thất bại'], 211);
     }
 
     function newPlaylist()
